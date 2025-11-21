@@ -19,7 +19,7 @@ class GrpcClientRunner(
             val createUserResponse = userServiceStub.createUser(createUserRequest)
 
             val newUserId = createUserResponse.user.userId
-            println("<-- Пользователь успешно создан с ID: $newUserId")
+            println("<-- Пользователь успешно создан с ID: $newUserId}; с email: ${createUserResponse.user.email}")
 
             println("\n--> Вызов GetUserBadges для пользователя $newUserId...")
             val badgesRequest = GetUserBadgesRequest.newBuilder().setUserId(newUserId).build()
