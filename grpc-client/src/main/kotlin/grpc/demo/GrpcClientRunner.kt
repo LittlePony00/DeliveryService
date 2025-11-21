@@ -5,9 +5,9 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 
 @Component
-class GrpcClientRunner : CommandLineRunner {
-
-    private lateinit var userServiceStub: UserServiceGrpc.UserServiceBlockingStub
+class GrpcClientRunner(
+    private val userServiceStub: UserServiceGrpc.UserServiceBlockingStub
+) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
         println("--- Клиент gRPC запущен ---")
