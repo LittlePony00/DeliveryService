@@ -1,5 +1,6 @@
 package grpc.demo
 
+import io.grpc.Status
 import io.grpc.stub.StreamObserver
 import org.springframework.grpc.server.service.GrpcService
 import java.util.UUID
@@ -30,6 +31,18 @@ class UserServiceImpl : UserServiceGrpc.UserServiceImplBase() {
         responseObserver: StreamObserver<GetUserBadgesResponse>
     ) {
         val userId = request.userId
+
+        val user = findUser(userId)
+
+        if (user == null) {
+            responseObserver.onError(
+                Status.NOT_FOUND
+                    .withDescription("Пользователь не найден: $userId")
+                    .asRuntimeException()
+            )
+
+            return
+        }
 
         println("Запрошены достижения для пользователя: $userId")
         val badge1 = Badge.newBuilder()

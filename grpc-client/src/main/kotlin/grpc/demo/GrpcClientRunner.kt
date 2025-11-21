@@ -1,5 +1,6 @@
 package grpc.demo
 
+import io.grpc.Status
 import io.grpc.StatusRuntimeException
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
@@ -22,12 +23,21 @@ class GrpcClientRunner(
             println("<-- Пользователь успешно создан с ID: $newUserId}; с email: ${createUserResponse.user.email}")
 
             println("\n--> Вызов GetUserBadges для пользователя $newUserId...")
-            val badgesRequest = GetUserBadgesRequest.newBuilder().setUserId(newUserId).build()
-            val badgesResponse = userServiceStub.getUserBadges(badgesRequest)
-            println("<-- Получены достижения:")
 
-            badgesResponse.badgesList.forEach { badge ->
-                println("    - " + badge.getName() + " (" + badge.getDescription() + ")")
+            try {
+                val badgesRequest = GetUserBadgesRequest.newBuilder().setUserId(newUserId).build()
+                val badgesResponse = userServiceStub.getUserBadges(badgesRequest)
+                println("<-- Получены достижения:")
+
+                badgesResponse.badgesList.forEach { badge ->
+                    println("    - " + badge.getName() + " (" + badge.getDescription() + ")")
+                }
+            } catch (e: StatusRuntimeException) {
+                if (e.status.code == Status.Code.NOT_FOUND) {
+                    println("!!! Ошибка: пользователь с ID $newUserId не найден")
+                } else {
+                    System.err.println("!!! Ошибка при вызове gRPC: ${e.status}")
+                }
             }
 
             println("\n--> Вызов UpdateUser для пользователя ${newUserId}...")
