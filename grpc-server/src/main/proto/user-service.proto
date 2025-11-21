@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+// Опции для генерации Java-классов в указанном пакете.
+option java_multiple_files = true;
+option java_package = "grpc.demo";
+option java_outer_classname = "UserServiceProto";
+
+// Определение сервиса для управления пользователями
+service UserService {
+  // Метод для создания нового пользователя
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+
+  // Метод для получения достижений пользователя по его ID
+  rpc GetUserBadges(GetUserBadgesRequest) returns (GetUserBadgesResponse) {}
+}
+
+// Сообщение-объект, ачивка-достижение
+message Badge {
+  string badge_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// Сообщение-объект, пользователь
+message User {
+  string user_id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// Запрос на создание пользователя
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+// Ответ после создания пользователя
+message CreateUserResponse {
+  User user = 1;
+}
+
+// Запрос на получение достижений
+message GetUserBadgesRequest {
+  string user_id = 1;
+}
+
+// Ответ, содержащий список достижений
+message GetUserBadgesResponse {
+// 'repeated' означает, что это будет список
+  repeated Badge badges = 1;
+}
