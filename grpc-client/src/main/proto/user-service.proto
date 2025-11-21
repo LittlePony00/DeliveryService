@@ -12,6 +12,8 @@ service UserService {
 
   // Метод для получения достижений пользователя по его ID
   rpc GetUserBadges(GetUserBadgesRequest) returns (GetUserBadgesResponse) {}
+
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
 }
 
 // Сообщение-объект, ачивка-достижение
@@ -48,4 +50,14 @@ message GetUserBadgesRequest {
 message GetUserBadgesResponse {
 // 'repeated' означает, что это будет список
   repeated Badge badges = 1;
+}
+
+message UpdateUserRequest {
+    string user_id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message UpdateUserResponse {
+    User user = 1;
 }

@@ -49,4 +49,25 @@ class UserServiceImpl : UserServiceGrpc.UserServiceImplBase() {
         responseObserver.onNext(response)
         responseObserver.onCompleted()
     }
+
+    override fun updateUser(request: UpdateUserRequest, responseObserver: StreamObserver<UpdateUserResponse>) {
+        val user = findUser(request.userId) ?: return
+
+        val updatedUser = User.newBuilder()
+            .setUserId(user.userId)
+            .setName(request.name)
+            .setEmail(request.email)
+            .build()
+
+        users[updatedUser.userId] = updatedUser
+
+        val response = UpdateUserResponse.newBuilder()
+            .setUser(updatedUser)
+            .build()
+
+        responseObserver.onNext(response)
+        responseObserver.onCompleted()
+    }
+
+    private fun findUser(id: String): User? = users[id]
 }

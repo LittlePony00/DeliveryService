@@ -30,6 +30,19 @@ class GrpcClientRunner(
                 println("    - " + badge.getName() + " (" + badge.getDescription() + ")")
             }
 
+            println("\n--> Вызов UpdateUser для пользователя ${newUserId}...")
+            val updateRequest = UpdateUserRequest.newBuilder()
+                .setUserId(newUserId)
+                .setName("Student2")
+                .setEmail("student@example.com")
+                .build()
+
+            val updateResponse = userServiceStub.updateUser(updateRequest)
+            val updatedUser = updateResponse.user
+            println("<-- Пользователь успешно обновлён:")
+            println("    ID   : ${updatedUser.userId}")
+            println("    Name : ${updatedUser.name}")
+            println("    Email: ${updatedUser.email}")
         } catch (e: StatusRuntimeException) {
             System.err.println("!!! Ошибка при вызове gRPC: ${e.status}")
         }
