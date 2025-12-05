@@ -3,46 +3,47 @@ import com.google.protobuf.gradle.id
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-
     id("org.springframework.boot") version "3.5.6"
     id("io.spring.dependency-management") version "1.1.7"
     id("com.google.protobuf") version "0.9.4"
 }
 
-group = "com.immortalidiot.main"
-version = "1.0-SNAPSHOT"
+group = "grpc.demo"
+version = "0.0.1-SNAPSHOT"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
-extra["netflixDgsVersion"] = "10.2.1"
 extra["springGrpcVersion"] = "0.12.0"
+
+dependencies {
+    implementation("io.grpc:grpc-services")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.grpc:spring-grpc-spring-boot-starter")
+    implementation("org.springframework.grpc:spring-grpc-client-spring-boot-starter")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.springframework.grpc:spring-grpc-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
 
 dependencyManagement {
     imports {
-        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:${property("netflixDgsVersion")}")
         mavenBom("org.springframework.grpc:spring-grpc-dependencies:${property("springGrpcVersion")}")
     }
 }
 
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-amqp")
-    implementation("com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter")
-
-    implementation("io.grpc:grpc-services")
-    implementation("org.springframework.grpc:spring-grpc-spring-boot-starter")
-    testImplementation("org.springframework.grpc:spring-grpc-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    implementation(project(":api"))
-    implementation(project(":events-contract"))
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xjsr305=strict")
+    }
 }
 
 protobuf {

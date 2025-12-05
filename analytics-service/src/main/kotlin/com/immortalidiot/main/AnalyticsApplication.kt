@@ -1,13 +1,11 @@
-package grpc.demo
+package com.immortalidiot.main
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.grpc.client.ImportGrpcClients
 
 @SpringBootApplication
-@ImportGrpcClients
-class GrpcClientApplication
+class AnalyticsApplication
 
 fun main(args: Array<String>) {
-    runApplication<GrpcClientApplication>(*args)
+    runApplication<AnalyticsApplication>(*args)
 }

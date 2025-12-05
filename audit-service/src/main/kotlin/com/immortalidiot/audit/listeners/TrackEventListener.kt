@@ -1,5 +1,6 @@
 package com.immortalidiot.audit.listeners
 
+import com.immortalidiot.RatedEvent.UserRatedEvent
 import com.immortalidiot.events.TrackEvent
 import org.slf4j.LoggerFactory
 import org.springframework.amqp.rabbit.annotation.*
@@ -121,6 +122,16 @@ class TrackEventListener {
         // Логика оповещения администраторов
     }
 
+    @RabbitListener(
+        bindings = [QueueBinding(
+            value = Queue(name = RATING_QUEUE_NAME, durable = "true"),
+            exchange = Exchange(name = RATING_EXCHANGE_NAME, type = "fanout")
+        )]
+    )
+    fun handleRating(event: UserRatedEvent) {
+        log.info("NOTIFY: Sending email. User {} has new rating: {}", event.userId, event.score)
+    }
+
     companion object {
         private val log = LoggerFactory.getLogger(TrackEventListener::class.java)
 
@@ -133,5 +144,8 @@ class TrackEventListener {
         const val DLQ_QUEUE_NAME = "notification-queue.dlq"
         const val DLX_EXCHANGE = "dlx-exchange"
         const val DLQ_ROUTING_KEY = "dlq.notifications"
+
+        const val RATING_QUEUE_NAME = "q.audit.analytics"
+        const val RATING_EXCHANGE_NAME = "analytics-fanout"
     }
 }

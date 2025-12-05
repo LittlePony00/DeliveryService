@@ -1,4 +1,4 @@
-package grpc.demo
+package com.immortalidiot
 
 import io.grpc.Status
 import io.grpc.StatusRuntimeException
