@@ -8,6 +8,7 @@ import com.immortalidiot.api.exception.ResourceNotFoundException
 import com.immortalidiot.events.TrackEvent
 import com.immortalidiot.main.config.RabbitMQConfig
 import com.immortalidiot.main.storage.InMemoryRepository
+import com.immortalidiot.main.websocket.TrackWebSocketPublisher
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.stereotype.Service
 import kotlin.math.ceil
@@ -24,7 +25,8 @@ interface TrackService {
 @Service
 internal class TrackServiceImpl(
     private val rabbitMqTemplate: RabbitTemplate,
-    private val repository: InMemoryRepository
+    private val repository: InMemoryRepository,
+    private val publisher: TrackWebSocketPublisher
 ) : TrackService {
     override fun createTrack(trackRequest: TrackRequest): TrackResponse {
         val newTrack = repository.createTrack(trackRequest)
@@ -46,6 +48,8 @@ internal class TrackServiceImpl(
         )
 
         rabbitMqTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY_TRACK_CREATED, event)
+
+        publisher.sendEvent(event)
     }
 
     override fun getTrackById(id: Long): TrackResponse {
@@ -94,5 +98,7 @@ internal class TrackServiceImpl(
         )
 
         rabbitMqTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY_TRACK_DELETED, event)
+
+        publisher.sendEvent(event)
     }
 }
