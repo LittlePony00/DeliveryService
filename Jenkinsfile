@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        PROJECT_DIR = "${WORKSPACE}/MusicSpring"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -15,12 +11,8 @@ pipeline {
 
         stage('Build All Services') {
             steps {
-                dir("${PROJECT_DIR}") {
-                    sh './gradlew :analytics-service:build -x test'
-                    sh './gradlew :audit-service:build -x test'
-                    sh './gradlew :statistics-service:build -x test'
-                    sh './gradlew :main:build -x test'
-                }
+                echo 'Building all services...'
+                sh './gradlew :analytics-service:build -x test :audit-service:build -x test :statistics-service:build -x test :main:build -x test'
             }
         }
     }
