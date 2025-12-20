@@ -16,7 +16,7 @@ pipeline {
         stage('Build Analytics Service') {
             steps {
                 dir("${PROJECT_DIR}/analytics-service") {
-                    sh './gradlew build -x test'
+                    sh '../gradlew build -x test'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Build Audit Service') {
             steps {
                 dir("${PROJECT_DIR}/audit-service") {
-                    sh './gradlew build -x test'
+                    sh '../gradlew build -x test'
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
         stage('Build Statistics Service') {
             steps {
                 dir("${PROJECT_DIR}/statistics-service") {
-                    sh './gradlew build -x test'
+                    sh '../gradlew build -x test'
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
         stage('Build Main Service') {
             steps {
                 dir("${PROJECT_DIR}/main") {
-                    sh './gradlew build -x test'
+                    sh '../gradlew build -x test'
                 }
             }
         }
