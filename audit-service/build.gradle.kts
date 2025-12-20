@@ -20,8 +20,13 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind")
 
     implementation(project(":events-contract"))
+
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4")
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
