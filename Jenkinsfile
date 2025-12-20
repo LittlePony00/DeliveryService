@@ -12,6 +12,7 @@ pipeline {
         stage('Build All Services') {
             steps {
                 echo 'Building all services...'
+                sh 'chmod +x ./gradlew'
                 sh './gradlew :analytics-service:build -x test :audit-service:build -x test :statistics-service:build -x test :main:build -x test'
             }
         }
