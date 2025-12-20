@@ -13,34 +13,13 @@ pipeline {
             }
         }
 
-        stage('Build Analytics Service') {
+        stage('Build All Services') {
             steps {
-                dir("${PROJECT_DIR}/analytics-service") {
-                    sh '../gradlew build -x test'
-                }
-            }
-        }
-
-        stage('Build Audit Service') {
-            steps {
-                dir("${PROJECT_DIR}/audit-service") {
-                    sh '../gradlew build -x test'
-                }
-            }
-        }
-
-        stage('Build Statistics Service') {
-            steps {
-                dir("${PROJECT_DIR}/statistics-service") {
-                    sh '../gradlew build -x test'
-                }
-            }
-        }
-
-        stage('Build Main Service') {
-            steps {
-                dir("${PROJECT_DIR}/main") {
-                    sh '../gradlew build -x test'
+                dir("${PROJECT_DIR}") {
+                    sh './gradlew :analytics-service:build -x test'
+                    sh './gradlew :audit-service:build -x test'
+                    sh './gradlew :statistics-service:build -x test'
+                    sh './gradlew :main:build -x test'
                 }
             }
         }
