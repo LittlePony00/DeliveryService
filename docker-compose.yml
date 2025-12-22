@@ -35,6 +35,8 @@ services:
     build:
       context: .
       dockerfile: analytics-service/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
       SERVER_PORT: 25590
@@ -48,6 +50,8 @@ services:
     build:
       context: .
       dockerfile: audit-service/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
       SERVER_PORT: 25567
@@ -61,6 +65,8 @@ services:
     build:
       context: .
       dockerfile: statistics-service/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
       SERVER_PORT: 25568
@@ -74,6 +80,8 @@ services:
     build:
       context: .
       dockerfile: main/Dockerfile
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     ports:
       - "25566:25566"
     environment:
@@ -99,7 +107,7 @@ services:
       JENKINS_OPTS: --prefix=/jenkins
     volumes:
       - jenkins_home:/var/jenkins_home
-      - ./MusicSpring:/var/jenkins_home/workspace/MusicSpring
+      - .:/var/jenkins_home/workspace/DeliveryService
     networks:
       - microservices-net
 

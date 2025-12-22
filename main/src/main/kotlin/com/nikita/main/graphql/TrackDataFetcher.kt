@@ -1,10 +1,10 @@
-package com.immortalidiot.main.graphql
+package com.nikita.main.graphql
 
-import com.immortalidiot.api.dto.OrderRequest
-import com.immortalidiot.api.dto.OrderResponse
+import com.nikita.api.dto.OrderRequest
+import com.nikita.api.dto.OrderResponse
 import com.netflix.graphql.dgs.*
 import graphql.schema.DataFetchingEnvironment
-import com.immortalidiot.main.service.DeliveryService
+import com.nikita.main.service.DeliveryService
 
 @DgsComponent
 class DeliveryDataFetcher(private val deliveryService: DeliveryService) {

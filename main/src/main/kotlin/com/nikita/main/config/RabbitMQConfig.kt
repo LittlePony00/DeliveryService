@@ -1,4 +1,4 @@
-package com.immortalidiot.main.config
+package com.nikita.main.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.amqp.core.FanoutExchange

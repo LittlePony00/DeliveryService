@@ -6,7 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 }
 
-group = "com.immortalidiot.api"
+group = "com.nikita.api"
 version = "1.0-SNAPSHOT"
 
 repositories {

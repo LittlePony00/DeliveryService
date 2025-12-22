@@ -1,4 +1,4 @@
-package com.immortalidiot.main.websocket
+package com.nikita.main.websocket
 
 import org.springframework.stereotype.Component
 import org.springframework.web.socket.CloseStatus

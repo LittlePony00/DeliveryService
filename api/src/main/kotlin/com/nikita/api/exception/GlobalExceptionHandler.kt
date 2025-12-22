@@ -1,6 +1,6 @@
-package com.immortalidiot.api.exception
+package com.nikita.api.exception
 
-import com.immortalidiot.api.dto.StatusResponse
+import com.nikita.api.dto.StatusResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

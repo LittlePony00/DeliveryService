@@ -1,4 +1,4 @@
-package com.immortalidiot.main
+package com.nikita.main
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

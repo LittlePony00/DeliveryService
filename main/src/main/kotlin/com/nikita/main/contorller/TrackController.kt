@@ -1,10 +1,10 @@
-package com.immortalidiot.main.contorller
+package com.nikita.main.contorller
 
-import com.immortalidiot.api.DeliveryApi
-import com.immortalidiot.api.dto.OrderRequest
-import com.immortalidiot.api.dto.OrderResponse
-import com.immortalidiot.main.assembler.OrderModelAssembler
-import com.immortalidiot.main.service.DeliveryService
+import com.nikita.api.DeliveryApi
+import com.nikita.api.dto.OrderRequest
+import com.nikita.api.dto.OrderResponse
+import com.nikita.main.assembler.OrderModelAssembler
+import com.nikita.main.service.DeliveryService
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.web.PagedResourcesAssembler

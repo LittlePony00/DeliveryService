@@ -1,9 +1,9 @@
-package com.immortalidiot.main.contorller
+package com.nikita.main.contorller
 
-import com.immortalidiot.RatedEvent.CourierRatedEvent
-import com.immortalidiot.main.AnalyticsServiceGrpc
-import com.immortalidiot.main.CourierRatingRequest
-import com.immortalidiot.main.config.RabbitMQConfig
+import com.nikita.events.RatedEvent.CourierRatedEvent
+import com.nikita.main.AnalyticsServiceGrpc
+import com.nikita.main.CourierRatingRequest
+import com.nikita.main.config.RabbitMQConfig
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping

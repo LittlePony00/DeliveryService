@@ -1,7 +1,7 @@
-package com.immortalidiot.main.websocket
+package com.nikita.main.websocket
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.immortalidiot.events.Event
+import com.nikita.events.events.Event
 import org.springframework.stereotype.Service
 
 @Service

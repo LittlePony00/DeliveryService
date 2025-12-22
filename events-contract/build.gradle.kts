@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.25"
 }
 
-group = "com.immortalidiot.events"
+group = "com.nikita.events"
 version = "1.0-SNAPSHOT"
 
 repositories {

@@ -1,4 +1,4 @@
-package com.immortalidiot.statistics.config
+package com.nikita.statistics.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.amqp.core.AcknowledgeMode

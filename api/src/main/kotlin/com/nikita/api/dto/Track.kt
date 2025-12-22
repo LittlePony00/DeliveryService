@@ -1,4 +1,4 @@
-package com.immortalidiot.api.dto
+package com.nikita.api.dto
 
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank

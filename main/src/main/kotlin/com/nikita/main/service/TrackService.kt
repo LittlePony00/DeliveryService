@@ -1,14 +1,14 @@
-package com.immortalidiot.main.service
+package com.nikita.main.service
 
-import com.immortalidiot.api.dto.PagedResponse
-import com.immortalidiot.api.dto.OrderRequest
-import com.immortalidiot.api.dto.OrderResponse
-import com.immortalidiot.api.dto.DeliveryStatus
-import com.immortalidiot.api.exception.ResourceNotFoundException
-import com.immortalidiot.events.DeliveryEvent
-import com.immortalidiot.main.config.RabbitMQConfig
-import com.immortalidiot.main.storage.InMemoryRepository
-import com.immortalidiot.main.websocket.DeliveryWebSocketPublisher
+import com.nikita.api.dto.PagedResponse
+import com.nikita.api.dto.OrderRequest
+import com.nikita.api.dto.OrderResponse
+import com.nikita.api.dto.DeliveryStatus
+import com.nikita.api.exception.ResourceNotFoundException
+import com.nikita.events.events.DeliveryEvent
+import com.nikita.main.config.RabbitMQConfig
+import com.nikita.main.storage.InMemoryRepository
+import com.nikita.main.websocket.DeliveryWebSocketPublisher
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.stereotype.Service
 import kotlin.math.ceil

@@ -1,19 +1,18 @@
 FROM gradle:8.13-jdk17 AS builder
 
 WORKDIR /app
-ENV GRADLE_USER_HOME=/home/gradle/.gradle
 
 COPY gradlew .
 COPY gradle gradle
-COPY build.gradle.kts settings.gradle.kts ./
-COPY audit-service audit-service
-COPY events-contract events-contract
+COPY build.gradle.kts settings.gradle.kts gradle.properties ./
 COPY api api
+COPY events-contract events-contract
 COPY analytics-service analytics-service
-COPY main main
+COPY audit-service audit-service
 COPY statistics-service statistics-service
+COPY main main
 
-RUN --mount=type=cache,target=${GRADLE_USER_HOME} gradle :main:bootJar --no-daemon
+RUN gradle :main:bootJar --parallel --no-daemon --build-cache -x test
 
 FROM eclipse-temurin:17-jre-alpine
 

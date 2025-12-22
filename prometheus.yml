@@ -10,5 +10,4 @@ scrape_configs:
             "main:25566",
             "audit-service:25567",
             "statistics-service:25568",
-            "analytics-service:25590"
           ]

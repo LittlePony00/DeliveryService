@@ -1,4 +1,4 @@
-package com.immortalidiot.main.contorller
+package com.nikita.main.contorller
 
 import org.springframework.hateoas.Link
 import org.springframework.hateoas.RepresentationModel

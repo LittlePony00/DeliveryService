@@ -1,6 +1,7 @@
-package com.immortalidiot.main.assembler
+package com.nikita.main.assembler
 
-import com.immortalidiot.api.dto.OrderResponse
+import com.nikita.api.dto.OrderResponse
+import com.nikita.main.contorller.DeliveryController
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.server.RepresentationModelAssembler
 import org.springframework.hateoas.server.core.DummyInvocationUtils.methodOn
@@ -12,8 +13,8 @@ class OrderModelAssembler : RepresentationModelAssembler<OrderResponse, EntityMo
     override fun toModel(order: OrderResponse): EntityModel<OrderResponse> {
         return EntityModel.of(
             order,
-            linkTo(methodOn(com.immortalidiot.main.contorller.DeliveryController::class.java).getOrderById(order.id)).withSelfRel(),
-            linkTo(methodOn(com.immortalidiot.main.contorller.DeliveryController::class.java).getAllOrders(0, 10)).withRel("collection"),
+            linkTo(methodOn(DeliveryController::class.java).getOrderById(order.id)).withSelfRel(),
+            linkTo(methodOn(DeliveryController::class.java).getAllOrders(0, 10)).withRel("collection"),
         )
     }
 }

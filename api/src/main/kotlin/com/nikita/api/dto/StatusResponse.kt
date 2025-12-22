@@ -1,4 +1,4 @@
-package com.immortalidiot.api.dto
+package com.nikita.api.dto
 
 data class StatusResponse(
     val status: String,

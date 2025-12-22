@@ -1,4 +1,4 @@
-package com.immortalidiot.main.filter
+package com.nikita.main.filter
 
 import jakarta.servlet.Filter
 import jakarta.servlet.FilterChain

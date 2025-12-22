@@ -1,4 +1,4 @@
-package com.immortalidiot.events
+package com.nikita.events.events
 
 import kotlinx.serialization.Serializable
 

@@ -1,21 +1,32 @@
-type Track {
+type Order {
     id: ID!
-    title: String!
-    author: String!
-    byteSequence: String!
-    continuation: Int!
-    status: TrackStatus!
+    deliveryAddress: String!
+    senderAddress: String!
+    recipientName: String!
+    weight: Int!
+    deliveryType: String!
+    status: DeliveryStatus!
     createdDate: String!
+    courierInfo: CourierInfo
+    estimatedDeliveryTime: String
 }
 
-enum TrackStatus {
-    ACTIVE
-    ARCHIVED
-    DELETED
+type CourierInfo {
+    courierId: ID
+    courierName: String
+    currentLocation: String
 }
 
-type TrackPage {
-    content: [Track]!
+enum DeliveryStatus {
+    PENDING
+    ASSIGNED
+    IN_PROGRESS
+    DELIVERED
+    CANCELLED
+}
+
+type OrderPage {
+    content: [Order]!
     pageNumber: Int!
     pageSize: Int!
     totalElements: Int!
@@ -24,19 +35,22 @@ type TrackPage {
 }
 
 type Query {
-    trackById(id: ID!): Track
-    tracks(page: Int = 0, size: Int = 10): TrackPage
+    orderById(id: ID!): Order
+    orders(page: Int = 0, size: Int = 10): OrderPage
 }
 
-input TrackInput {
-    title: String!
-    author: String!
-    byteSequence: String!
-    continuation: Int!
+input OrderInput {
+    deliveryAddress: String!
+    senderAddress: String!
+    recipientName: String!
+    weight: Int!
+    deliveryType: String!
 }
 
 type Mutation {
-    createTrack(input: TrackInput!): Track
-    deleteTrack(id: ID!): ID
-    archiveTrack(id: ID!): Track
+    createOrder(input: OrderInput!): Order
+    assignCourier(id: ID!): Order
+    startDelivery(id: ID!): Order
+    completeDelivery(id: ID!): Order
+    cancelOrder(id: ID!): ID
 }

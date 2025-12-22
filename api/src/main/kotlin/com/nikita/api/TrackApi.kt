@@ -1,4 +1,4 @@
-package com.immortalidiot.api
+package com.nikita.api
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -7,9 +7,9 @@ import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
-import com.immortalidiot.api.dto.OrderRequest
-import com.immortalidiot.api.dto.OrderResponse
-import com.immortalidiot.api.dto.StatusResponse
+import com.nikita.api.dto.OrderRequest
+import com.nikita.api.dto.OrderResponse
+import com.nikita.api.dto.StatusResponse
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.PagedModel
 import org.springframework.http.HttpStatus

@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+*.iml
+.vscode
+
+# Build artifacts
+**/build/
+**/bin/
+**/.gradle/
+**/out/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+*.md
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+**/test/
+**/*Test.kt
+
+# Temporary files
+**/*.tmp
+**/*.swp
+**/*.bak
+

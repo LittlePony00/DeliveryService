@@ -1,4 +1,4 @@
-package com.immortalidiot.events
+package com.nikita.events.events
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties

@@ -6,7 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.7"
 }
 
-group = "com.immortalidiot.statistics"
+group = "com.nikita.statistics"
 version = "unspecified"
 
 repositories {

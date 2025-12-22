@@ -9,7 +9,7 @@ plugins {
     id("com.google.protobuf") version "0.9.4"
 }
 
-group = "com.immortalidiot.main"
+group = "com.nikita.main"
 version = "1.0-SNAPSHOT"
 
 repositories {

@@ -1,9 +1,9 @@
-package com.immortalidiot.statistics
+package com.nikita.statistics
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication(scanBasePackages = ["com.immortalidiot.statistics"])
+@SpringBootApplication(scanBasePackages = ["com.nikita.statistics"])
 class Application
 
 fun main(args: Array<String>) {

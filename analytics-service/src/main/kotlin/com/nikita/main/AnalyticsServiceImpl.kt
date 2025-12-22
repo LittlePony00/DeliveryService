@@ -1,4 +1,4 @@
-package com.immortalidiot.main
+package com.nikita.main
 
 import io.grpc.stub.StreamObserver
 import org.springframework.grpc.server.service.GrpcService
@@ -25,7 +25,7 @@ class AnalyticsServiceImpl : AnalyticsServiceGrpc.AnalyticsServiceImplBase() {
             .setVerdict(verdict)
             .build()
 
-        println("📊 Analytics: Calculated rating for courier ${request.courierId}: $score ($verdict)")
+        println("Analytics: Calculated rating for courier ${request.courierId}: $score ($verdict)")
 
         responseObserver.onNext(response)
         responseObserver.onCompleted()

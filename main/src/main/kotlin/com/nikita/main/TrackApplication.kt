@@ -1,4 +1,4 @@
-package com.immortalidiot.main
+package com.nikita.main
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -7,7 +7,7 @@ import org.springframework.grpc.client.ImportGrpcClients
 import org.springframework.hateoas.config.EnableHypermediaSupport
 
 @SpringBootApplication(
-    scanBasePackages = ["com.immortalidiot.main", "com.immortalidiot.api", "com.immortalidiot.events"],
+    scanBasePackages = ["com.nikita.main", "com.nikita.api", "com.nikita.events"],
     exclude = [DataSourceAutoConfiguration::class]
 )
 @EnableHypermediaSupport(type = [EnableHypermediaSupport.HypermediaType.HAL])

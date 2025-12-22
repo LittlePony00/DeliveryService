@@ -1,4 +1,4 @@
-package com.immortalidiot.audit.config
+package com.nikita.audit.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.amqp.rabbit.connection.ConnectionFactory

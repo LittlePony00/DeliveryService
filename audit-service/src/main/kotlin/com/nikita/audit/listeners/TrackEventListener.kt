@@ -1,7 +1,7 @@
-package com.immortalidiot.audit.listeners
+package com.nikita.audit.listeners
 
-import com.immortalidiot.RatedEvent.CourierRatedEvent
-import com.immortalidiot.events.DeliveryEvent
+import com.nikita.events.RatedEvent.CourierRatedEvent
+import com.nikita.events.events.DeliveryEvent
 import org.slf4j.LoggerFactory
 import org.springframework.amqp.rabbit.annotation.*
 import org.springframework.amqp.support.AmqpHeaders

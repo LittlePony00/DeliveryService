@@ -1,4 +1,4 @@
-package com.immortalidiot.api.dto
+package com.nikita.api.dto
 
 import io.swagger.v3.oas.annotations.media.Schema
 

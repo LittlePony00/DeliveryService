@@ -1,9 +1,9 @@
-package com.immortalidiot.main.storage
+package com.nikita.main.storage
 
-import com.immortalidiot.api.dto.OrderRequest
-import com.immortalidiot.api.dto.OrderResponse
-import com.immortalidiot.api.dto.DeliveryStatus
-import com.immortalidiot.api.dto.CourierInfo
+import com.nikita.api.dto.OrderRequest
+import com.nikita.api.dto.OrderResponse
+import com.nikita.api.dto.DeliveryStatus
+import com.nikita.api.dto.CourierInfo
 import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime

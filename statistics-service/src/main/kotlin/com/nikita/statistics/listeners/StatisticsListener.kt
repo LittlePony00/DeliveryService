@@ -1,13 +1,13 @@
-package com.immortalidiot.statistics.listeners
+package com.nikita.statistics.listeners
 
-import com.immortalidiot.events.DeliveryEvent
+import com.nikita.events.events.DeliveryEvent
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.amqp.support.AmqpHeaders
 import org.springframework.messaging.handler.annotation.Header
 import org.springframework.stereotype.Component
 import com.rabbitmq.client.Channel
 import org.springframework.messaging.handler.annotation.Payload
-import com.immortalidiot.statistics.config.RabbitConfig
+import com.nikita.statistics.config.RabbitConfig
 
 @Component
 class DeliveryStatisticsListener {

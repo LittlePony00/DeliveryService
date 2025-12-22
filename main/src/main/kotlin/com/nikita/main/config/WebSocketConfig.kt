@@ -1,6 +1,6 @@
-package com.immortalidiot.main.config
+package com.nikita.main.config
 
-import com.immortalidiot.main.websocket.DeliveryWebSocketHandler
+import com.nikita.main.websocket.DeliveryWebSocketHandler
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.socket.config.annotation.EnableWebSocket
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer
