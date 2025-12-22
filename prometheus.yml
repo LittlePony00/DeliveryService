@@ -2,7 +2,7 @@ global:
   scrape_interval: 5s
 
 scrape_configs:
-  - job_name: "track_app"
+  - job_name: "delivery_app"
     metrics_path: "/actuator/prometheus"
     static_configs:
       - targets:

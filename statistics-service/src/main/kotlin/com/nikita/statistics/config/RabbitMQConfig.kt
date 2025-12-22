@@ -8,6 +8,7 @@ import org.springframework.amqp.core.TopicExchange
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory
 import org.springframework.amqp.rabbit.connection.ConnectionFactory
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -29,12 +30,16 @@ class RabbitConfig {
     fun statisticsExchange() = TopicExchange(EXCHANGE_NAME)
 
     @Bean
-    fun bindingStatisticsQueue(queue: Queue, exchange: TopicExchange) =
-        BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY_ORDER_CREATED)
+    fun bindingStatisticsQueue(
+        @Qualifier("statisticsQueue") queue: Queue,
+        exchange: TopicExchange
+    ) = BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY_ORDER_CREATED)
 
     @Bean
-    fun bindingStatisticsCompletedQueue(statisticsCompletedQueue: Queue, exchange: TopicExchange) =
-        BindingBuilder.bind(statisticsCompletedQueue).to(exchange).with(ROUTING_KEY_DELIVERY_COMPLETED)
+    fun bindingStatisticsCompletedQueue(
+        @Qualifier("statisticsCompletedQueue") statisticsCompletedQueue: Queue,
+        exchange: TopicExchange
+    ) = BindingBuilder.bind(statisticsCompletedQueue).to(exchange).with(ROUTING_KEY_DELIVERY_COMPLETED)
 
     @Bean
     fun containerFactory(connectionFactory: ConnectionFactory): SimpleRabbitListenerContainerFactory {
