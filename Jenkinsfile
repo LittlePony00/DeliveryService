@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:27.1-dind'
-            args '-v /var/run/docker.sock:/var/run/docker.sock --privileged'
-        }
-    }
+    agent any
 
     options {
         timeout(time: 30, unit: 'MINUTES')
@@ -20,8 +15,36 @@ pipeline {
 
         stage('Setup') {
             steps {
-                echo 'Setting up permissions...'
-                sh 'chmod +x gradlew gradlew.bat'
+                echo 'Setting up environment...'
+                sh '''
+                    # Установка Docker CLI если не установлен
+                    if ! command -v docker &> /dev/null; then
+                        echo "Installing Docker CLI..."
+                        apt-get update -qq
+                        apt-get install -y -qq docker.io || apt-get install -y -qq docker-ce-cli
+                    fi
+                    docker --version
+                    
+                    # Установка docker-compose если не установлен
+                    if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/null; then
+                        echo "Installing docker-compose..."
+                        curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                        chmod +x /usr/local/bin/docker-compose
+                    fi
+                    
+                    # Проверка доступности
+                    if docker compose version &> /dev/null; then
+                        echo "Using: docker compose"
+                    elif command -v docker-compose &> /dev/null; then
+                        echo "Using: docker-compose"
+                        docker-compose --version
+                    else
+                        echo "ERROR: docker-compose not available!"
+                        exit 1
+                    fi
+                    
+                    chmod +x gradlew gradlew.bat
+                '''
             }
         }
 
