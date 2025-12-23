@@ -28,14 +28,35 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 echo 'Building all Docker images...'
-                sh 'docker-compose build --progress=plain'
+                sh '''
+                    # Проверяем доступность docker
+                    docker --version
+                    # Используем docker compose (встроено) или docker-compose
+                    if docker compose version &> /dev/null; then
+                        docker compose build --progress=plain
+                    elif command -v docker-compose &> /dev/null; then
+                        docker-compose build --progress=plain
+                    else
+                        echo "ERROR: docker-compose not found!"
+                        exit 1
+                    fi
+                '''
             }
         }
 
         stage('Deploy Services') {
             steps {
                 echo 'Starting all services...'
-                sh 'docker-compose up -d'
+                sh '''
+                    if docker compose version &> /dev/null; then
+                        docker compose up -d
+                    elif command -v docker-compose &> /dev/null; then
+                        docker-compose up -d
+                    else
+                        echo "ERROR: docker-compose not found!"
+                        exit 1
+                    fi
+                '''
             }
         }
 
@@ -45,7 +66,11 @@ pipeline {
                 sh 'sleep 30'
                 sh '''
                     echo "Checking services status..."
-                    docker-compose ps
+                    if docker compose version &> /dev/null; then
+                        docker compose ps
+                    elif command -v docker-compose &> /dev/null; then
+                        docker-compose ps
+                    fi
                     echo "Checking main service health..."
                     curl -f http://localhost:25566/actuator/health || exit 1
                 '''
@@ -56,15 +81,14 @@ pipeline {
     post {
         success {
             echo 'Build and deployment completed successfully!'
-            echo 'Services are running:'
-            sh 'docker-compose ps'
+            echo 'Services are running. Check status with: docker-compose ps'
         }
         failure {
             echo 'Build or deployment failed!'
-            sh 'docker-compose logs --tail=50'
+            echo 'Check logs with: docker-compose logs --tail=50'
         }
         always {
-            echo 'Cleaning up...'
+            echo 'Pipeline completed.'
         }
     }
 }
