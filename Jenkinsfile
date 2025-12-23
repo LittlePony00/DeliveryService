@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'docker:27.1-dind'
+            args '-v /var/run/docker.sock:/var/run/docker.sock --privileged'
+        }
+    }
 
     options {
         timeout(time: 30, unit: 'MINUTES')
@@ -13,27 +18,53 @@ pipeline {
             }
         }
 
-        stage('Build All Services') {
+        stage('Setup') {
             steps {
-                echo 'Building all services...'
-                sh 'chmod +x ./gradlew'
-                sh './gradlew :analytics-service:build -x test :audit-service:build -x test :statistics-service:build -x test :main:build -x test'
+                echo 'Setting up permissions...'
+                sh 'chmod +x gradlew gradlew.bat'
             }
         }
 
-        stage('Archive Results') {
+        stage('Build Docker Images') {
             steps {
-                archiveArtifacts artifacts: '**/build/libs/*.jar', allowEmptyArchive: true
+                echo 'Building all Docker images...'
+                sh 'docker-compose build --progress=plain'
+            }
+        }
+
+        stage('Deploy Services') {
+            steps {
+                echo 'Starting all services...'
+                sh 'docker-compose up -d'
+            }
+        }
+
+        stage('Health Check') {
+            steps {
+                echo 'Waiting for services to start...'
+                sh 'sleep 30'
+                sh '''
+                    echo "Checking services status..."
+                    docker-compose ps
+                    echo "Checking main service health..."
+                    curl -f http://localhost:25566/actuator/health || exit 1
+                '''
             }
         }
     }
 
     post {
         success {
-            echo 'Build completed successfully!'
+            echo 'Build and deployment completed successfully!'
+            echo 'Services are running:'
+            sh 'docker-compose ps'
         }
         failure {
-            echo 'Build failed!'
+            echo 'Build or deployment failed!'
+            sh 'docker-compose logs --tail=50'
+        }
+        always {
+            echo 'Cleaning up...'
         }
     }
 }
