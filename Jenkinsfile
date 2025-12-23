@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -14,6 +18,12 @@ pipeline {
                 echo 'Building all services...'
                 sh 'chmod +x ./gradlew'
                 sh './gradlew :analytics-service:build -x test :audit-service:build -x test :statistics-service:build -x test :main:build -x test'
+            }
+        }
+
+        stage('Archive Results') {
+            steps {
+                archiveArtifacts artifacts: '**/build/libs/*.jar', allowEmptyArchive: true
             }
         }
     }
