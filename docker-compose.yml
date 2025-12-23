@@ -38,8 +38,11 @@ services:
       args:
         BUILDKIT_INLINE_CACHE: 1
     environment:
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SERVER_PORT: 25590
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - SERVER_PORT=25590
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -53,8 +56,11 @@ services:
       args:
         BUILDKIT_INLINE_CACHE: 1
     environment:
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SERVER_PORT: 25567
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - SERVER_PORT=25567
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -68,8 +74,11 @@ services:
       args:
         BUILDKIT_INLINE_CACHE: 1
     environment:
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SERVER_PORT: 25568
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - SERVER_PORT=25568
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -85,10 +94,13 @@ services:
     ports:
       - "25566:25566"
     environment:
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SERVER_PORT: 25566
-      GRPC_CLIENT_ANALYTICS_SERVICE_ADDRESS: static://analytics-service:25590
-      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - SERVER_PORT=25566
+      - GRPC_CLIENT_ANALYTICS_SERVICE_ADDRESS=static://analytics-service:25590
+      - MANAGEMENT_ZIPKIN_TRACING_ENDPOINT=http://zipkin:9411/api/v2/spans
     depends_on:
       rabbitmq:
         condition: service_healthy
