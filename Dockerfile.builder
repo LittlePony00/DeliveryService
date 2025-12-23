@@ -33,3 +33,4 @@ RUN ls -la analytics-service/build/libs/ && \
     ls -la statistics-service/build/libs/ && \
     ls -la main/build/libs/
 
+
